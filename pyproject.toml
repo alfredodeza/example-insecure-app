@@ -1,0 +1,18 @@
+[project]
+name = "practice-bookmarks"
+version = "1.0.0"
+description = "A small bookmarks service, used to practice GitHub's security features"
+requires-python = "==3.12.*"
+dependencies = [
+    # An older Flask on purpose: Dependabot raises an alert for it.
+    "flask==3.1.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest==9.2.0",
+    "zizmor==1.32.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

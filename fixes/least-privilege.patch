@@ -1,0 +1,12 @@
+--- tests.yml
++++ tests.yml
+@@ -5,6 +5,9 @@
+     branches: [main]
+   pull_request:
+ 
++permissions:
++  contents: read
++
+ jobs:
+   test:
+     runs-on: ubuntu-latest

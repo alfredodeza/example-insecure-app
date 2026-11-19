@@ -1,0 +1,27 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write      # create the release
+      id-token: write      # ask for a short-lived identity to sign with
+      attestations: write  # store the attestation
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - run: tar czf practice-bookmarks.tar.gz app.py pyproject.toml uv.lock
+      - uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4.2.2
+        with:
+          subject-path: practice-bookmarks.tar.gz
+      - run: gh release create "$GITHUB_REF_NAME" practice-bookmarks.tar.gz
+        env:
+          GH_TOKEN: ${{ github.token }}

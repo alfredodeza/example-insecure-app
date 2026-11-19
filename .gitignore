@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.env
+leaks.json
+sbom.json
+practice-bookmarks.tar.gz
+*.orig
+*.rej
