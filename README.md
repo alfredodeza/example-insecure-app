@@ -52,8 +52,10 @@ git push -u origin main
 3. Move the API key out of the code before looking for it in the history: in `app.py`,
    add `import os` and replace the `API_KEY = "…"` line with
    `API_KEY = os.environ["PRACTICE_API_KEY"]`; put the old key in `.env` as
-   `PRACTICE_API_KEY=<the old key>`; commit `app.py`. Then `gitleaks git --report-path
-   leaks.json` finds the old key in the first commit.
+   `PRACTICE_API_KEY=<the old key>`; commit `app.py`. Then `gitleaks git --log-opts="--
+   app.py" --report-path leaks.json` scans every commit that changed `app.py` and finds the
+   old key in the first one. Without `--log-opts` it also finds the key in this README's
+   example commands.
 4. Rotate it: `uv run make_key.py` writes a new key to `.env`, then
    `uv run --env-file .env app.py &` starts the app with it. The old key now gets `401`.
 5. Turn on code scanning (default setup), read its alert, then

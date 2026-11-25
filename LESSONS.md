@@ -30,8 +30,8 @@ git status --short
 
 ```bash
 grep -n API_KEY app.py
-git log --oneline
-gitleaks git --report-path leaks.json
+git log --oneline -- app.py
+gitleaks git --log-opts="-- app.py" --report-path leaks.json
 jq '.[0] | {RuleID, File, StartLine, Commit}' leaks.json
 ```
 
