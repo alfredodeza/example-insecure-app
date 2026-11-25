@@ -18,9 +18,9 @@ git push -u origin main
 ## 2.2.2 Pushing a secret and seeing it blocked
 
 ```bash
-openssl genpkey -algorithm ed25519 -out deploy-key.pem
-git add deploy-key.pem
-git commit -m "Add the deploy key"
+echo "https://hooks.slack.com/services/T…/B…/…" > slack-webhook.txt
+git add slack-webhook.txt
+git commit -m "Add the Slack webhook"
 git push
 git reset HEAD~1
 git status --short

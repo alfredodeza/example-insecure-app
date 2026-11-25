@@ -17,7 +17,7 @@ You need:
 * [uv](https://docs.astral.sh/uv/), which installs Python 3.12 and the pinned packages
   (`uv sync`).
 * Git, and the [GitHub CLI](https://cli.github.com) signed in with `gh auth login`.
-* `curl`, `patch`, `jq` and OpenSSL (`openssl`), which most systems already have.
+* `curl`, `patch` and `jq`, which most systems already have.
 * [Gitleaks](https://github.com/gitleaks/gitleaks) 8.30.1, from its releases page or with
   `mise use gitleaks@8.30.1`.
 * [Syft](https://github.com/anchore/syft), any recent release.
@@ -44,9 +44,11 @@ git push -u origin main
 
 1. In the repository's Settings, Advanced Security: turn on Secret Protection and push
    protection.
-2. Make a private key and try to push it (`openssl genpkey -algorithm ed25519 -out
-   deploy-key.pem`, add, commit, `git push`): the push is refused. Take the commit back with
-   `git reset HEAD~1` and delete the key file.
+2. Write a made-up Slack webhook address to `slack-webhook.txt` and try to push it (add,
+   commit, `git push`): the push is refused. Make the address up yourself: in
+   `https://hooks.slack.com/services/T…/B…/…`, put 8 random capital letters and digits after
+   `T`, 10 after `B`, and 24 letters and digits at the end. Take the commit back with
+   `git reset HEAD~1` and delete the file.
 3. Move the API key out of the code before looking for it in the history: in `app.py`,
    add `import os` and replace the `API_KEY = "…"` line with
    `API_KEY = os.environ["PRACTICE_API_KEY"]`; put the old key in `.env` as
