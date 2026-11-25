@@ -1,12 +1,14 @@
 """A small bookmarks service: search saved links, and list them all with an API key."""
 import hmac
+import os
 import sqlite3
 
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-API_KEY = "practice_key_4f1d8c2b9e7a6035d1c8"
+# The key comes from the environment (uv run --env-file .env), never from the code.
+API_KEY = os.environ["PRACTICE_API_KEY"]
 
 BOOKMARKS = [
     ("Python documentation", "https://docs.python.org/3/"),
