@@ -32,8 +32,8 @@ def health():
 @app.get("/search")
 def search():
     words = request.args.get("q", "")
-    query = f"SELECT title, url FROM bookmarks WHERE title LIKE '%{words}%'"
-    rows = database().execute(query).fetchall()
+    query = "SELECT title, url FROM bookmarks WHERE title LIKE ?"
+    rows = database().execute(query, (f"%{words}%",)).fetchall()
     return jsonify([{"title": title, "url": url} for title, url in rows])
 
 
